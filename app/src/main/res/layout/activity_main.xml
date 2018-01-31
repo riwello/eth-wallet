@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.tuling.wallethdemo.li.le.wallethdemo.MainActivity">
+    tools:context=".MainActivity">
 
     <Button
         android:layout_width="wrap_content"
@@ -36,11 +36,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="transation"
-        android:text="交易" />
+        android:text="转出" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="switchWallet"
-        android:text="选择钱包" />
+        android:text="钱包列表" />
 </LinearLayout>

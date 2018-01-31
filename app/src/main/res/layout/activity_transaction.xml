@@ -56,8 +56,9 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:hint="Value" />
-    <Button
-        android:text="ether"
+    <TextView
+        android:padding="10dp"
+        android:text="wei"
         android:id="@+id/btn_select_unit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

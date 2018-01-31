@@ -58,12 +58,10 @@ public class SendActivity extends BaseActivity {
     EditText etNonce;
     @BindView(R.id.btn_send)
     Button btnSend;
-    @BindView(R.id.btn_select_unit)
-    Button btnSelectUnit;
+
     @BindView(R.id.tv_mgs)
     TextView tvMgs;
 
-    private Convert.Unit unit = Convert.Unit.ETHER;
 
     @Override
     protected int getLayoutId() {
@@ -115,7 +113,7 @@ public class SendActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.btn_select_from, R.id.btn_select_to, R.id.btn_send, R.id.btn_select_unit})
+    @OnClick({R.id.btn_select_from, R.id.btn_select_to, R.id.btn_send})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_select_from:
@@ -131,40 +129,11 @@ public class SendActivity extends BaseActivity {
             case R.id.btn_send:
                 sendTrasaction();
                 break;
-            case R.id.btn_select_unit:
-                formatUnit();
-                break;
+
         }
     }
 
-    private void formatUnit() {
-        PopupMenu popupMenu = new PopupMenu(this, btnSelectUnit);
-        popupMenu.getMenuInflater().inflate(R.menu.item_eth_unit, popupMenu.getMenu());
-        popupMenu.setGravity(Gravity.CENTER);
-        popupMenu.show();
-        popupMenu.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.unit_wei:
-                    unit = Convert.Unit.WEI;
-                    break;
-                case R.id.unit_Kwei:
-                    break;
-                case R.id.unit_Mwei:
-                    break;
-                case R.id.unit_Gwei:
-                    break;
-                case R.id.unit_microether:
-                    break;
-                case R.id.unit_milliether:
-                    break;
-                case R.id.unit_ether:
-                    break;
 
-            }
-            return true;
-        });
-
-    }
 
     private void sendTrasaction() {
 

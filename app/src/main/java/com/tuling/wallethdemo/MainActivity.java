@@ -35,17 +35,6 @@ public class MainActivity extends AppCompatActivity {
         Log.e("dir", "def:" + WalletUtils.getDefaultKeyDirectory());
         Log.e("dir", "data:" + s);
         Log.e("dir", "getfiles:" + getFilesDir().getAbsolutePath());
-//        Web3JService.getInstance().transactionObservable().subscribeOn(rx.schedulers.Schedulers.io())
-//                .subscribe(transaction -> {
-//                        Log.e("tansaction","from:"+transaction.getFrom()
-//                                +"\nto:"+transaction.getTo()
-//                        +"\nvalue:"+transaction.getValue()
-//                        +"\ngas:"+transaction.getGas()
-//                        +"\ngasPrice"+transaction.getGasPrice()
-//                        );
-//
-//                }, throwable -> throwable.printStackTrace());
-
     }
 
 
@@ -53,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, ImportKeystore.class));
 
     }
+    
 
     public void importPrivateKey(View view) {
         startActivity(new Intent(this, ImportPrivateKey.class));
@@ -73,7 +63,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, SwitchWalletActivity.class));
     }
 
+    public void sampleContract(View view) {
 
+        startActivity(new Intent(this,SampleContractActivity.class));
+    }
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
             "android.permission.READ_EXTERNAL_STORAGE",
@@ -84,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public static void verifyStoragePermissions(Activity activity) {
-
         try {
             //检测是否有写的权限
             int permission = ActivityCompat.checkSelfPermission(activity,
@@ -112,4 +104,6 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("web3j",version);
                 }, throwable -> throwable.printStackTrace());
     }
+
+
 }

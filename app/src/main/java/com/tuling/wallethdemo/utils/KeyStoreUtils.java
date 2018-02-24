@@ -69,7 +69,7 @@ public class KeyStoreUtils {
         throw new FileNotFoundException("not found keystore(找不到keystore文件)");
     }
 
-    public static String signedTransactionData(String frome, String to, String nonce, String gasPrice, String gasLimit, String value) throws FileNotFoundException {
+    public static String signedTransactionData(String from, String to, String nonce, String gasPrice, String gasLimit, String value) throws FileNotFoundException {
         RawTransaction rawTransaction = RawTransaction.createEtherTransaction(
                 new BigInteger(nonce),
                 new BigInteger(gasPrice),
@@ -77,7 +77,7 @@ public class KeyStoreUtils {
                 to,
                 new BigInteger(value));
 
-        Credentials credentials = KeyStoreUtils.getCredentials(frome);
+        Credentials credentials = KeyStoreUtils.getCredentials(from);
         byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
         return Numeric.toHexString(signedMessage);
 

@@ -43,4 +43,9 @@
         android:layout_height="wrap_content"
         android:onClick="switchWallet"
         android:text="钱包列表" />
+    <Button
+        android:text="智能合约"
+        android:onClick="sampleContract"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>

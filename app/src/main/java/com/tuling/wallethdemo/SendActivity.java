@@ -16,9 +16,11 @@ import com.tuling.wallethdemo.Model.Web3JService;
 
 import com.tuling.wallethdemo.utils.KeyStoreUtils;
 
+import org.web3j.crypto.ContractUtils;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.EthGetTransactionCount;
 import org.web3j.protocol.core.methods.response.EthSendTransaction;
+import org.web3j.tx.Contract;
 import org.web3j.utils.Convert;
 import org.web3j.utils.Numeric;
 
@@ -38,8 +40,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class SendActivity extends BaseActivity {
 
-    private static final int FROM_ADDRESS = 232;
-    private static final int TO_ADDRESS = 255;
+ 
     @BindView(R.id.tv_from)
     TextView tvFrom;
     @BindView(R.id.btn_select_from)
@@ -102,10 +103,10 @@ public class SendActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         switch (requestCode) {
-            case FROM_ADDRESS:
+            case SwitchWalletActivity.FROM_ADDRESS:
                 tvFrom.setText(data.getStringExtra("address"));
                 break;
-            case TO_ADDRESS:
+            case SwitchWalletActivity.TO_ADDRESS:
                 etTo.setText(data.getStringExtra("address"));
                 break;
         }
@@ -114,17 +115,17 @@ public class SendActivity extends BaseActivity {
 
 
     @OnClick({R.id.btn_select_from, R.id.btn_select_to, R.id.btn_send})
-    public void onViewClicked(View view) {
+    public void onViewClicked(View view)  {
         switch (view.getId()) {
             case R.id.btn_select_from:
                 Intent fromIntent = new Intent(this, SwitchWalletActivity.class);
                 fromIntent.putExtra("SwitchMode", true);
-                startActivityForResult(fromIntent, FROM_ADDRESS);
+                startActivityForResult(fromIntent, SwitchWalletActivity.FROM_ADDRESS);
                 break;
             case R.id.btn_select_to:
                 Intent toInetnt = new Intent(this, SwitchWalletActivity.class);
                 toInetnt.putExtra("SwitchMode", true);
-                startActivityForResult(toInetnt, TO_ADDRESS);
+                startActivityForResult(toInetnt, SwitchWalletActivity.TO_ADDRESS);
                 break;
             case R.id.btn_send:
                 sendTrasaction();
@@ -146,6 +147,7 @@ public class SendActivity extends BaseActivity {
         Observable
                 .create((ObservableOnSubscribe<EthSendTransaction>) e -> {
                     Web3j web3j = Web3JService.getInstance();
+
                     String hexValue = KeyStoreUtils.signedTransactionData(from, to, nonce, gasPrice, gasLimit, value);
                     EthSendTransaction send = web3j.ethSendRawTransaction(hexValue).send();
                     e.onNext(send);

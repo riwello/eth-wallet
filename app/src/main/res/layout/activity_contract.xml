@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingLeft="8dp"
+    android:layout_height="match_parent"
+    tools:context="com.tuling.wallethdemo.SampleContractActivity">
+
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        android:gravity="center_vertical"
+        android:hint="选择你的帐号"
+        app:layout_constraintBottom_toTopOf="@+id/btn_get"
+        app:layout_constraintEnd_toStartOf="@+id/btn_select"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_select" />
+
+    <Button
+        android:id="@+id/btn_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="选择"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+
+        android:gravity="center_vertical"
+        android:hint="内容"
+        app:layout_constraintBottom_toBottomOf="@id/btn_get"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btn_get"
+        app:layout_constraintTop_toTopOf="@id/btn_get" />
+
+    <Button
+
+        android:id="@+id/btn_get"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/btn_select"
+        tools:layout_editor_absoluteY="93dp" />
+
+    <EditText
+        android:id="@+id/et_set"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintRight_toLeftOf="@id/btn_set"
+        android:hint="设置的数值"
+
+        app:layout_constraintBottom_toBottomOf="@id/btn_set"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btn_set" />
+
+    <Button
+        android:id="@+id/btn_set"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="设置"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_get" />
+</android.support.constraint.ConstraintLayout>

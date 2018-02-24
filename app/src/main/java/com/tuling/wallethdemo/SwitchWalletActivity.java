@@ -25,6 +25,8 @@ import butterknife.BindView;
  */
 
 public class SwitchWalletActivity extends BaseActivity {
+    public static final int FROM_ADDRESS = 232;
+    public static final int TO_ADDRESS = 255;
     @BindView(R.id.recyclerview)
     RecyclerView recyclerview;
     private BaseQuickAdapter<KeyStoreBean, BaseViewHolder> adapter;
@@ -50,7 +52,7 @@ public class SwitchWalletActivity extends BaseActivity {
         };
         recyclerview.setAdapter(adapter);
         recyclerview.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-
+    
 
     }
 

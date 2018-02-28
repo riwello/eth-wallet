@@ -28,12 +28,17 @@ public class KeyStoreUtils {
     private static final String DEFAULTKEY = "DEFAULT";
     public static final String KEYSTORE_PATH = App.getInstance().getFilesDir().getPath() + "/keystore";
 
+    /**
+     * 在内置存储生成keystore方便选择
+     * @param ecKeyPair
+     * @return
+     */
     public static String genKeyStore2Files(ECKeyPair ecKeyPair) {
 
 
         try {
             File file =getKeyStorePathFile();
-            String s = WalletUtils.generateWalletFile(DEFAULTKEY, ecKeyPair, file, true);
+            String s = WalletUtils.generateWalletFile(DEFAULTKEY, ecKeyPair, file, false);
             Log.e("gen",s);
             return s;
 

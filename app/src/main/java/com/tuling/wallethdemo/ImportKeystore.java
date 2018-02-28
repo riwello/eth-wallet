@@ -1,12 +1,13 @@
 package com.tuling.wallethdemo;
 
+import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.tuling.wallethdemo.utils.KeyStoreUtils;
 
 import org.web3j.crypto.CipherException;
@@ -14,11 +15,14 @@ import org.web3j.crypto.Credentials;
 import org.web3j.crypto.ECKeyPair;
 import org.web3j.crypto.Wallet;
 import org.web3j.crypto.WalletFile;
+import org.web3j.crypto.WalletUtils;
 import org.web3j.utils.Numeric;
 
+import java.io.File;
 import java.io.IOException;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -36,6 +40,7 @@ public class ImportKeystore extends BaseActivity {
     Button btnImport;
     @BindView(R.id.tv_mgs)
     TextView tvMgs;
+
 
     @Override
     protected int getLayoutId() {
@@ -59,6 +64,7 @@ public class ImportKeystore extends BaseActivity {
         importKeyStore();
     }
 
+
     private void importKeyStore() {
         checkInput();
         String pwd = etPassword.getText().toString();
@@ -68,9 +74,12 @@ public class ImportKeystore extends BaseActivity {
             ObjectMapper mapper = new ObjectMapper();
 
             WalletFile walletFile = mapper.readValue(keystore, WalletFile.class);
+
+            // TODO: 2018/2/28  pc端生成的keystore会导致内存溢出
             Credentials credentials = Credentials.create(Wallet.decrypt(pwd, walletFile));
             ECKeyPair ecKeyPair = credentials.getEcKeyPair();
             KeyStoreUtils.genKeyStore2Files(ecKeyPair);
+
             String msg = "address:\n" + credentials.getAddress()
                     + "\nprivateKey:\n" + Numeric.encodeQuantity(ecKeyPair.getPrivateKey())
                     + "\nPublicKey:\n" + Numeric.encodeQuantity(ecKeyPair.getPublicKey());
@@ -100,5 +109,8 @@ public class ImportKeystore extends BaseActivity {
         }
         return true;
     }
+
+
+
 
 }

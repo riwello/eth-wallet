@@ -1,0 +1,22 @@
+{
+    "abi": "[{\"constant\":true,\"inputs\":[],\"name\":\"value\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"v\",\"type\":\"uint256\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"v\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]",
+    "bytecode": "6060604052341561000f57600080fd5b60405160208061011083398101604052808051600055505060db806100356000396000f30060606040526004361060525763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416633fa4f2458114605757806360fe47b11460795780636d4ce63c14608e575b600080fd5b3415606157600080fd5b6067609e565b60405190815260200160405180910390f35b3415608357600080fd5b608c60043560a4565b005b3415609857600080fd5b606760a9565b60005481565b600055565b600054905600a165627a7a72305820f73446cbee87472b34970ef40c92b936074b613d8243951a7555c5a01ac83a840029",
+    "functionHashes": {
+        "get()": "6d4ce63c",
+        "set(uint256)": "60fe47b1",
+        "value()": "3fa4f245"
+    },
+    "gasEstimates": {
+        "creation": [
+            20140,
+            43800
+        ],
+        "external": {
+            "get()": 417,
+            "set(uint256)": 20156,
+            "value()": 373
+        },
+        "internal": {}
+    },
+    "runtimeBytecode": "60606040526004361060525763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416633fa4f2458114605757806360fe47b11460795780636d4ce63c14608e575b600080fd5b3415606157600080fd5b6067609e565b60405190815260200160405180910390f35b3415608357600080fd5b608c60043560a4565b005b3415609857600080fd5b606760a9565b60005481565b600055565b600054905600a165627a7a72305820f73446cbee87472b34970ef40c92b936074b613d8243951a7555c5a01ac83a840029"
+}

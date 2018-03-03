@@ -25,7 +25,7 @@ import java.math.BigInteger;
  */
 
 public class KeyStoreUtils {
-    private static final String DEFAULTKEY = "DEFAULT";
+    public static final String DEFAULTKEY = "DEFAULT";
     public static final String KEYSTORE_PATH = App.getInstance().getFilesDir().getPath() + "/keystore";
 
     /**

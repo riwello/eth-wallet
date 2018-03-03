@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         Log.e("dir", "def:" + WalletUtils.getDefaultKeyDirectory());
         Log.e("dir", "data:" + s);
         Log.e("dir", "getfiles:" + getFilesDir().getAbsolutePath());
+
+
     }
 
 

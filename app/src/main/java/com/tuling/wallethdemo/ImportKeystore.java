@@ -10,6 +10,9 @@ import android.widget.TextView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tuling.wallethdemo.utils.KeyStoreUtils;
 
+import org.ethereum.geth.Account;
+import org.ethereum.geth.Geth;
+import org.ethereum.geth.KeyStore;
 import org.web3j.crypto.CipherException;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.ECKeyPair;
@@ -20,6 +23,7 @@ import org.web3j.utils.Numeric;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,48 +70,51 @@ public class ImportKeystore extends BaseActivity {
 
 
     private void importKeyStore() {
-        checkInput();
+        if (etKeystore.length() == 0) {
+            etKeystore.setError("请输入keystore");
+            return ;
+        }
+        if (etPassword.length() == 0) {
+            etPassword.setError("请输入password");
+            return;
+        }
+        File file = new File(getFilesDir(), "keystore/");
+        KeyStore keyStore =new KeyStore(file.getAbsolutePath(), Geth.LightScryptN, Geth.LightScryptP  );
         String pwd = etPassword.getText().toString();
         String keystore = etKeystore.getText().toString();
         try {
 
-            ObjectMapper mapper = new ObjectMapper();
+            Account account = keyStore.importKey(keystore.getBytes(Charset.forName("UTF-8")), pwd, KeyStoreUtils.DEFAULTKEY);
 
-            WalletFile walletFile = mapper.readValue(keystore, WalletFile.class);
+            Log.e("keystore", "url: " +account.getURL()+"address"+account.getAddress());
 
-            // TODO: 2018/2/28  pc端生成的keystore会导致内存溢出
-            Credentials credentials = Credentials.create(Wallet.decrypt(pwd, walletFile));
-            ECKeyPair ecKeyPair = credentials.getEcKeyPair();
-            KeyStoreUtils.genKeyStore2Files(ecKeyPair);
+//            ObjectMapper mapper = new ObjectMapper();
+//
+//            WalletFile walletFile = mapper.readValue(keystore, WalletFile.class);
+//
+//            // TODO: 2018/2/28  pc端生成的keystore会导致内存溢出
+//            Credentials credentials = Credentials.create(Wallet.decrypt(pwd, walletFile));
+//            ECKeyPair ecKeyPair = credentials.getEcKeyPair();
+//            KeyStoreUtils.genKeyStore2Files(ecKeyPair);
+//
+//            String msg = "address:\n" + account.getAddress()
+//                    + "\nprivateKey:\n" + Numeric.encodeQuantity(ecKeyPair.getPrivateKey())
+//                    + "\nPublicKey:\n" + Numeric.encodeQuantity(ecKeyPair.getPublicKey());
 
-            String msg = "address:\n" + credentials.getAddress()
-                    + "\nprivateKey:\n" + Numeric.encodeQuantity(ecKeyPair.getPrivateKey())
-                    + "\nPublicKey:\n" + Numeric.encodeQuantity(ecKeyPair.getPublicKey());
-
-            tvMgs.setText(msg);
+            tvMgs.setText("url: " +account.getURL()+"address"+account.getAddress());
 
 
-            Log.e("importKey", msg);
+//            Log.e("importKey", msg);
 
         } catch (IOException e) {
             e.printStackTrace();
         } catch (CipherException e) {
             e.printStackTrace();
+        } catch (Exception e1) {
+            e1.printStackTrace();
         }
 
 
-    }
-
-    private boolean checkInput() {
-        if (etKeystore.length() == 0) {
-            etKeystore.setError("请输入keystore");
-            return false;
-        }
-        if (etPassword.length() == 0) {
-            etPassword.setError("请输入password");
-            return false;
-        }
-        return true;
     }
 
 

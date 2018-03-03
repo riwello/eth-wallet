@@ -25,6 +25,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
+
 public class SampleContractActivity extends AppCompatActivity {
 
     private String contractAddress = "0xe8bb91414fae190894b02cf7ebf10b6f69b74b26";
@@ -62,6 +63,7 @@ public class SampleContractActivity extends AppCompatActivity {
                 startActivityForResult(toInetnt, SwitchWalletActivity.FROM_ADDRESS);
                 break;
             case R.id.btn_get:
+
                 getContractValue();
 
 
@@ -119,6 +121,7 @@ public class SampleContractActivity extends AppCompatActivity {
                 String address = data.getStringExtra("address");
                 tvAddress.setText(address);
                 Observable.create((ObservableOnSubscribe<SampleContract>) emitter -> {
+                    // TODO: 2018/3/3 合约调用前要先部署 ,已经部署过直接load
                     SampleContract sampleContract = new SampleContract(contractAddress,
                             Web3JService.getInstance(),
                             KeyStoreUtils.getCredentials(address),
